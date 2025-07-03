@@ -763,12 +763,16 @@ async def txt_handler(bot: Client, m: Message):
                 appxkey = url.split('*')[1]
                 url = url.split('*')[0]
 
-            if "embed" in url:
-               ytf = f"bestvideo[height<={raw_text2}]+bestaudio/best[height<={raw_text2}]"
-            elif "youtu" in url:
-               ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
+            # 🔁 Convert embed to normal YouTube URL
+            if "youtube.com/embed/" in url:
+              video_id = url.split("/")[-1]
+            url = f"https://www.youtube.com/watch?v={video_id}"
+
+             # 👇 Format selection
+            if "youtu" in url:
+              ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
             else:
-               ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
+              ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
     
            
             if "jw-prod" in url:
@@ -1075,12 +1079,16 @@ async def text_handler(bot: Client, m: Message):
                 appxkey = url.split('*')[1]
                 url = url.split('*')[0]
 
-            if "embed" in url:
-               ytf = f"bestvideo[height<={raw_text2}]+bestaudio/best[height<={raw_text2}]"
-            elif "youtu" in url:
-               ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
+            # 🔁 Convert embed to normal YouTube URL
+            if "youtube.com/embed/" in url:
+               video_id = url.split("/")[-1]
+               url = f"https://www.youtube.com/watch?v={video_id}"
+
+            # 👇 Format selection
+            if "youtu" in url:
+                ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
             else:
-               ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
+                ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
            
             if "jw-prod" in url:
                 cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
