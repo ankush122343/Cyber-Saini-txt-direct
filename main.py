@@ -47,7 +47,7 @@ bot = Client(
     bot_token=BOT_TOKEN
 )
 
-AUTH_USER = os.environ.get('AUTH_USERS', '6831195071,7180384086,7526345865').split(',')
+AUTH_USER = os.environ.get('AUTH_USERS', '6831195071,7180384086,7526345865,7993588999').split(',')
 AUTH_USERS = [int(user_id) for user_id in AUTH_USER]
 if int(OWNER) not in AUTH_USERS:
     AUTH_USERS.append(int(OWNER))
